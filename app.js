@@ -1,4 +1,4 @@
-import { login, logout, observarSessao } from "./auth.js";
+import { login, registrar, logout, observarSessao } from "./auth.js";
 import { carregarBancoUsuario, salvarBancoUsuario } from "./db.js";
 
 const STORAGE_KEY = "controle_dividas_v2";
