@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+	
 });
 
 function bindEvents() {
@@ -123,6 +124,32 @@ await logout();
   byId("btnLimparSimulacao").addEventListener("click", clearSimulation);
 
   document.querySelectorAll(".money-input").forEach(bindMoneyInput);
+
+const btnCriarConta = byId("btnCriarConta");
+
+if(btnCriarConta){
+
+btnCriarConta.addEventListener("click", async ()=>{
+
+const email = byId("loginEmail").value;
+const senha = byId("loginSenha").value;
+
+try{
+
+await registrar(email,senha);
+
+alert("Conta criada com sucesso!");
+
+}catch(e){
+
+alert(e.message);
+
+}
+
+});
+
+}
+	
 }
 
 /* =========================================================
