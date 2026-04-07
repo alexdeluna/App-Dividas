@@ -35,6 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.firebaseUser = user;
 
+	state.db = defaultDB(); 
+
   if(user){
 
     mostrarUsuarioTopo(user);
@@ -90,7 +92,13 @@ if(btnLogin){
 const btnLogout = byId("btnLogout");
 
 if(btnLogout){
-  btnLogout.addEventListener("click", logout);
+  btnLogout.addEventListener("click", async ()=>{
+
+localStorage.removeItem(STORAGE_KEY);
+
+await logout();
+
+});
 }
 	
   byId("btnTema").addEventListener("click", toggleTheme);
