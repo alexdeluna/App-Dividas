@@ -1,4 +1,4 @@
-import { login, registrar, logout, observarSessao } from "./auth.js";
+import { login, registrar, logout, observarSessao, resetSenha, loginGoogle } from "./auth.js";
 import { carregarBancoUsuario, salvarBancoUsuario } from "./db.js";
 
 const STORAGE_KEY = "controle_dividas_v2";
@@ -139,6 +139,55 @@ try{
 await registrar(email,senha);
 
 alert("Conta criada com sucesso!");
+
+}catch(e){
+
+alert(e.message);
+
+}
+
+});
+
+}
+
+	const btnResetSenha = byId("btnResetSenha");
+
+if(btnResetSenha){
+
+btnResetSenha.addEventListener("click", async ()=>{
+
+const email = byId("loginEmail").value;
+
+if(!email){
+alert("Digite seu email primeiro.");
+return;
+}
+
+try{
+
+await resetSenha(email);
+
+alert("Email de recuperação enviado.");
+
+}catch(e){
+
+alert(e.message);
+
+}
+
+});
+
+}
+
+	const btnGoogle = byId("btnGoogle");
+
+if(btnGoogle){
+
+btnGoogle.addEventListener("click", async ()=>{
+
+try{
+
+await loginGoogle();
 
 }catch(e){
 
