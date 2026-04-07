@@ -15,6 +15,10 @@ export function login(email, senha){
   return signInWithEmailAndPassword(auth,email,senha);
 }
 
+export function registrar(email,senha){
+return createUserWithEmailAndPassword(auth,email,senha);
+}
+
 export function logout(){
   return signOut(auth);
 }
