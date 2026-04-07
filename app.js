@@ -95,8 +95,20 @@ const btnLogout = byId("btnLogout");
 if(btnLogout){
   btnLogout.addEventListener("click", async ()=>{
 
+/* limpa banco local */
 localStorage.removeItem(STORAGE_KEY);
 
+/* limpa campos da tela de login */
+const email = byId("loginEmail");
+const senha = byId("loginSenha");
+
+if(email) email.value = "";
+if(senha) senha.value = "";
+
+/* limpa memória do app */
+state.db = defaultDB();
+
+/* executa logout firebase */
 await logout();
 
 });
