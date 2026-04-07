@@ -3,7 +3,10 @@ getAuth,
 signInWithEmailAndPassword,
 createUserWithEmailAndPassword,
 signOut,
-onAuthStateChanged
+onAuthStateChanged,
+sendPasswordResetEmail,
+GoogleAuthProvider,
+signInWithPopup
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
@@ -17,6 +20,18 @@ export function login(email, senha){
 
 export function registrar(email,senha){
 return createUserWithEmailAndPassword(auth,email,senha);
+}
+
+export function resetSenha(email){
+return sendPasswordResetEmail(auth,email);
+}
+
+export async function loginGoogle(){
+
+const provider = new GoogleAuthProvider();
+
+return signInWithPopup(auth,provider);
+
 }
 
 export function logout(){
