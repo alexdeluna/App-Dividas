@@ -98,17 +98,25 @@ if(btnLogout){
 /* limpa banco local */
 localStorage.removeItem(STORAGE_KEY);
 
-/* limpa campos da tela de login */
+/* limpa campos login */
 const email = byId("loginEmail");
 const senha = byId("loginSenha");
 
 if(email) email.value = "";
 if(senha) senha.value = "";
 
-/* limpa memória do app */
+/* limpa email do topo */
+const emailTopo = byId("emailUsuario");
+if(emailTopo) emailTopo.textContent = "";
+
+/* esconde área do usuário */
+const topo = byId("usuarioTopo");
+if(topo) topo.classList.add("hidden");
+
+/* limpa memória */
 state.db = defaultDB();
 
-/* executa logout firebase */
+/* logout firebase */
 await logout();
 
 });
