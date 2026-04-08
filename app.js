@@ -1476,14 +1476,43 @@ function mostrarUsuarioTopo(user){
    SERVICE WORKER
    ========================================================= */
 function registerSW() {
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", async () => {
-      try {
-        await navigator.serviceWorker.register("./sw.js");
-        console.log("Service Worker registrado com sucesso.");
-      } catch (error) {
-        console.error("Erro ao registrar Service Worker:", error);
-      }
-    });
-  }
+
+if ("serviceWorker" in navigator) {
+
+window.addEventListener("load", async () => {
+
+try {
+
+const reg = await navigator.serviceWorker.register("./sw.js");
+
+console.log("Service Worker registrado.");
+
+reg.addEventListener("updatefound", () => {
+
+const newWorker = reg.installing;
+
+newWorker.addEventListener("statechange", () => {
+
+if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+
+console.log("Nova versão disponível.");
+
+window.location.reload();
+
+}
+
+});
+
+});
+
+} catch (error) {
+
+console.error("Erro SW:", error);
+
+}
+
+});
+
+}
+
 }
