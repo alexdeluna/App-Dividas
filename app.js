@@ -1,6 +1,22 @@
 import { login, registrar, logout, observarSessao, resetSenha, loginGoogle } from "./auth.js";
 import { carregarBancoUsuario, salvarBancoUsuario } from "./db.js";
 
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt", (e) => {
+
+e.preventDefault();
+
+deferredPrompt = e;
+
+const btnInstalar = byId("btnInstalar");
+
+if(btnInstalar){
+btnInstalar.classList.remove("hidden");
+}
+
+});
+
 const STORAGE_KEY = "controle_dividas_v2";
 const THEME_KEY = "controle_dividas_tema_v2";
 const PROJECAO_MESES = 36;
@@ -214,6 +230,30 @@ await loginGoogle();
 alert(e.message);
 
 }
+
+});
+
+}
+
+	const btnInstalar = byId("btnInstalar");
+
+if(btnInstalar){
+
+btnInstalar.addEventListener("click", async ()=>{
+
+if(!deferredPrompt) return;
+
+deferredPrompt.prompt();
+
+const { outcome } = await deferredPrompt.userChoice;
+
+if(outcome === "accepted"){
+console.log("App instalado");
+}
+
+deferredPrompt = null;
+
+btnInstalar.classList.add("hidden");
 
 });
 
