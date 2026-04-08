@@ -110,6 +110,9 @@ const btnLogout = byId("btnLogout");
 
 if(btnLogout){
   btnLogout.addEventListener("click", async ()=>{
+const confirmar = confirm("Deseja realmente sair da sua conta?");
+
+if(!confirmar) return;
 
 /* limpa banco local */
 localStorage.removeItem(STORAGE_KEY);
